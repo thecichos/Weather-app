@@ -1,0 +1,71 @@
+/* line 1, sass/master.sass */
+#container {
+  height: 700px;
+  width: 850px;
+  background: lightblue;
+  margin: 0;
+}
+/* line 7, sass/master.sass */
+#container .top {
+  margin-left: 20px;
+  display: flex;
+}
+/* line 10, sass/master.sass */
+#container .top .placeName {
+  float: right;
+  margin: 0;
+  margin-top: 0.6em;
+  margin-left: 12em;
+  font-size: 40px;
+}
+/* line 16, sass/master.sass */
+#container .top .big {
+  font-size: 40px;
+  margin: 0;
+  margin-top: 20px;
+}
+/* line 21, sass/master.sass */
+#container .top .big .small {
+  font-size: 20px;
+  vertical-align: text-top;
+}
+/* line 27, sass/master.sass */
+#container .subCon {
+  width: 95%;
+  margin-top: 2em;
+}
+/* line 31, sass/master.sass */
+#container .subCon ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+/* line 38, sass/master.sass */
+#container .subCon ul li {
+  height: 160px;
+  width: 18%;
+  border-bottom: 1px solid black;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+/* line 45, sass/master.sass */
+#container .subCon ul li p {
+  text-align: center;
+}
+/* line 47, sass/master.sass */
+#container .subCon ul li p .subConSmall {
+  font-size: 8px;
+  vertical-align: text-top;
+}
+/* line 51, sass/master.sass */
+#container .subCon ul li:first-child {
+  margin-left: 10px;
+}
+/* line 54, sass/master.sass */
+#container .subCon ul #active {
+  border: 1px solid black;
+  border-bottom: 0;
+}

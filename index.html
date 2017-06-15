@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Weather app</title>
+    <link rel="stylesheet" href="css/master.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var weather_data
+      $.getJSON('http://api.apixu.com/v1/forecast.json?key=4eee583147284fc5a59105724171506&q=naestved&days=5', function(json, textStatus) {
+          weather_data = json
+      });
+    </script>
+    <script src="js/_main.js"></script>
+  </head>
+  <body>
+
+<div id="container">
+  <div class="top">
+    <p class="big">0<b class="small">&#8451</b></p>
+    <p class="placeName"></p>
+  </div>
+  <div class="subCon">
+    <ul>
+      <li id="active">       </li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <div class="main"></div>
+  </div>
+</div>
+  </body>
+</html>
