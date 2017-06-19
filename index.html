@@ -6,6 +6,7 @@
     <title>Weather app</title>
     <link rel="stylesheet" href="css/master.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript">
       var weather_data
       $.getJSON('http://api.apixu.com/v1/forecast.json?key=4eee583147284fc5a59105724171506&q=naestved&days=5', function(json, textStatus) {
@@ -22,7 +23,7 @@
     <p class="placeName"></p>
   </div>
   <div class="subCon">
-    <ul>
+    <ul class="weekMenu">
       <li id="active">       </li>
       <li></li>
       <li></li>

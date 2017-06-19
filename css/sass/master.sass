@@ -1,6 +1,8 @@
+*
+  user-select: none
 #container
   height: 700px
-  width: 850px
+  width: 100%
   background: lightblue
   margin: 0
 
@@ -25,10 +27,36 @@
 
 
   .subCon
-    width: 95%
+    width: 100%
     margin-top: 2em
+    .main
+      h2
+        padding: 20px
+        border-bottom: 1px solid white
+      ul
+        display: flex
+        justify-content: space-between
+        list-style: none
+        margin: 0
+        padding: 0
 
-    ul
+        .temperature
+          ul
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            li
+              padding: 20px
+        .prognoseContainer
+          width: 40%
+          #tempprognose
+            height: 250px
+            width: 100%
+          #humidPrognose
+            height: 250px
+            width: 100%
+
+    .weekMenu
       width: 100%
       margin: 0
       padding: 0
@@ -38,7 +66,7 @@
       li
         height: 160px
         width: 18%
-        border-bottom: 1px solid black
+        border-bottom: 1px solid white
         padding-left: 20px
         padding-right: 20px
         padding-top: 20px
@@ -48,9 +76,7 @@
             font-size: 8px
             vertical-align: text-top
 
-      li:first-child
-        margin-left: 10px
-
       #active
-        border: 1px solid black
+        border: 1px solid white
         border-bottom: 0
+        background-color: steelblue
