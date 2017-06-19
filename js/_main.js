@@ -71,8 +71,8 @@ function data(day) {
   var condition = "<div><img src="+ weather_data.forecast.forecastday[day].day.condition.icon +">"
   condition += "<br>" + weather_data.forecast.forecastday[day].day.condition.text + "</div>"
 
-  var prognose = '<div class="prognoseContainer"><div id="tempprognose"></div>'
-  prognose += '<div id="humidPrognose"></div></div>'
+  var prognose = '<div class="prognoseContainer"><div id="tempprognose"class="ct-chart ct-perfect-fourth"></div>'
+  prognose += '<div id="humidPrognose"class="ct-chart ct-perfect-fourth"></div></div>'
 
   var temp = "<ul>"
   temp += humidity
@@ -99,6 +99,7 @@ function prognose() {
   var hTemp = []
   var feelTemp = []
   var hourHumid = []
+  var t = []
   for (var i = 0; i < hourPrognose.length; i++) {
     hTemp.push(hourPrognose[i][0])
   }
@@ -110,22 +111,43 @@ function prognose() {
   for (var i = 0; i < hourPrognose.length; i++) {
     hourHumid.push(hourPrognose[i][2])
   }
+  for (var i = 0; i < hourPrognose.length; i++) {
+    t.push(i)
+  }
 
-  temp = document.getElementById("tempprognose")
-  Plotly.plot(temp, [
-    {
-      y: hTemp,
-      name: "temperature",
-      type: "bar"
-    }, {
-      name: "feels like",
-      y: feelTemp,
-      type: "bar"
-    }]
-  )
-  humid = document.getElementById("humidPrognose")
-  Plotly.plot(humid, [
-    {name: "humidity",
-    y: hourHumid}]
-  )
+  var data = {
+    labels: [t],
+    series: [
+      hTemp,
+      feelTemp
+    ]
+  };
+
+  var options = {
+    seriesBarDistance: 10
+  };
+
+  new Chartist.bar("#tempprognose", data, options)
+
+  // temp = document.getElementById("tempprognose")
+  // Plotly.plot(temp, [
+  //   {
+  //     y: hTemp,
+  //     name: "temperature",
+  //     type: "bar"
+  //   }, {
+  //     name: "feels like",
+  //     y: feelTemp,
+  //     type: "bar"
+  //   }, {
+  //     background: "lightblue"
+  //   }
+  // ]
+  //
+  // )
+  // humid = document.getElementById("humidPrognose")
+  // Plotly.plot(humid, [
+  //   {name: "humidity",
+  //   y: hourHumid}]
+  // )
 }
