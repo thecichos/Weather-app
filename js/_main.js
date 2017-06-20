@@ -13,7 +13,7 @@ $(document).ready(function() {
   // $("li:nth-child(1)").text(weekday[d.getDay()]);
   $("ul").children().each(function(index) {
     $(this).append("<p> " + weekday[calc(d.getDay() + index)] + "</p>");
-    $(this).val(calc(d.getDay() + index))
+    $(this).val(calc(index))
   });
 
   function calc(num) {
@@ -28,7 +28,7 @@ $(document).ready(function() {
     $(this).siblings("#active").attr("id", "")
     $(".subCon").children(".main").empty()
     $(".subCon").children(".main").append("<h2>" + $(this).children().first().text() + "</h2>")
-    $(".subCon").children('.main').append(data($(this).val() - 1))
+    $(".subCon").children('.main').append(data($(this).val()))
     prognose()
   })
 
@@ -55,24 +55,26 @@ function set() {
     $(this).append("<p>humidity: " + weather_data.forecast.forecastday[index].day.avghumidity + "<span class=percentage>%</span></p>")
   });
   $(".subCon").children(".main").append("<h2>" + $("#active").children().first().text() + "</h2>")
-  $(".subCon").children('.main').append(data($(".subCon").children("ul").children().first().val() - 1))
+  $(".subCon").children('.main').append(data($(".subCon").children("ul").children().first().val()))
   prognose()
 }
 
 function data(day) {
-  var humidity = "<li class=humidity> average humidity: " + weather_data.forecast.forecastday[day].day.avghumidity + "</li>"
+  console.log(day)
+  var humidity = "<li class=humidity> average humidity: " + weather_data.forecast.forecastday[day].day.avghumidity + "%</li>"
 
   var temperature = "<li class=temperature> <ul>"
-  temperature += "<li>lowest temperature: " + weather_data.forecast.forecastday[day].day.mintemp_c + "</li>"
-  temperature += "<li>maximum temperature: " + weather_data.forecast.forecastday[day].day.avgtemp_c + "</li>"
-  temperature += "<li>minimum temperature: " + weather_data.forecast.forecastday[day].day.maxtemp_c + "</li>"
+  temperature += "<li>lowest temperature: " + weather_data.forecast.forecastday[day].day.mintemp_c + "<span class=subConSmall>&#8451</span></li>"
+  temperature += "<li>maximum temperature: " + weather_data.forecast.forecastday[day].day.avgtemp_c + "<span class=subConSmall>&#8451</span></li>"
+  temperature += "<li>minimum temperature: " + weather_data.forecast.forecastday[day].day.maxtemp_c + "<span class=subConSmall>&#8451</span></li>"
   temperature += "</ul></li>"
 
   var condition = "<div><img src="+ weather_data.forecast.forecastday[day].day.condition.icon +">"
   condition += "<br>" + weather_data.forecast.forecastday[day].day.condition.text + "</div>"
 
-  var prognose = '<div class="prognoseContainer"><div id="tempprognose"class="ct-chart ct-perfect-fourth"></div>'
-  prognose += '<div id="humidPrognose"class="ct-chart ct-perfect-fourth"></div></div>'
+  var prognose = "<div class=prognoseContainer><div id=tempprognose></div>"
+  prognose += "<div id=feelslikeprognose></div>"
+  prognose += "<div id=humidPrognose></div></div>"
 
   var temp = "<ul>"
   temp += humidity
@@ -85,7 +87,7 @@ function data(day) {
 }
 
 function prognose() {
-  var day = $('#active').val() - 1
+  var day = $('#active').val()
   console.log(day)
   var hourPrognose = []
   for (var i = 0; i < weather_data.forecast.forecastday[day].hour.length; i++) {
@@ -100,6 +102,9 @@ function prognose() {
   var feelTemp = []
   var hourHumid = []
   var t = []
+  var k = []
+  var z = []
+  var g = []
   for (var i = 0; i < hourPrognose.length; i++) {
     hTemp.push(hourPrognose[i][0])
   }
@@ -114,40 +119,40 @@ function prognose() {
   for (var i = 0; i < hourPrognose.length; i++) {
     t.push(i)
   }
+  for (var i = 0; i < hourPrognose.length; i++) {
+    var y = {"time": t[i],"temperature": hTemp[i]}
+    k.push(y)
+  }
+  for (var i = 0; i < hourPrognose.length; i++) {
+    var y = {"time": t[i],"feels like": feelTemp[i]}
+    z.push(y)
+  }
+  for (var i = 0; i < hourPrognose.length; i++) {
+    var y = {"time": t[i],"humidity": hourHumid[i]}
+    g.push(y)
+  }
 
-  var data = {
-    labels: [t],
-    series: [
-      hTemp,
-      feelTemp
-    ]
-  };
+  MG.data_graphic({
+    title: "hour prognose",
+    data: k,
+    target: "#tempprognose",
+    x_accessor: "time",
+    y_accessor: "temperature"
+  });
 
-  var options = {
-    seriesBarDistance: 10
-  };
+  MG.data_graphic({
+    title: "feels like prognose",
+    data: z,
+    target: "#feelslikeprognose",
+    x_accessor: "time",
+    y_accessor: "feels like"
+  });
 
-  new Chartist.bar("#tempprognose", data, options)
-
-  // temp = document.getElementById("tempprognose")
-  // Plotly.plot(temp, [
-  //   {
-  //     y: hTemp,
-  //     name: "temperature",
-  //     type: "bar"
-  //   }, {
-  //     name: "feels like",
-  //     y: feelTemp,
-  //     type: "bar"
-  //   }, {
-  //     background: "lightblue"
-  //   }
-  // ]
-  //
-  // )
-  // humid = document.getElementById("humidPrognose")
-  // Plotly.plot(humid, [
-  //   {name: "humidity",
-  //   y: hourHumid}]
-  // )
+  MG.data_graphic({
+    title: "humidity prognose",
+    data: g,
+    target: "#humidPrognose",
+    x_accessor: "time",
+    y_accessor: "humidity"
+  });
 }

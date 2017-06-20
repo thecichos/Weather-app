@@ -49,18 +49,18 @@
   display: flex;
   justify-content: space-between;
   list-style: none;
-  margin: 0;
+  margin: 20px;
   padding: 0;
 }
-/* line 44, sass/master.sass */
+/* line 42, sass/master.sass */
+#container .subCon .main ul li {
+  padding: 20px;
+}
+/* line 46, sass/master.sass */
 #container .subCon .main ul .temperature ul {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-/* line 48, sass/master.sass */
-#container .subCon .main ul .temperature ul li {
-  padding: 20px;
 }
 /* line 50, sass/master.sass */
 #container .subCon .main ul .prognoseContainer {
@@ -72,7 +72,7 @@
 #container .subCon .main ul .prognoseContainer #tempprognose {
   background-color: lightblue;
   height: 250px;
-  width: 40%;
+  width: 50%;
 }
 /* line 58, sass/master.sass */
 #container .subCon .main ul .prognoseContainer #humidPrognose {
